@@ -1,0 +1,16 @@
+---
+name: Text-CSV-Unicode
+version: 0.01
+author:
+  - 'Robin Barker <rmbarker@cpan.org>'
+abstract: |-
+  comma-separated values manipulation routines
+                          with potentially wide character data
+license: perl
+requires:
+  Text::CSV: 0.01
+provides:
+  Text::CSV::Unicode:
+    file: lib/Text/CSV/Unicode.pm
+    version: 0.01
+generated_by: Module::Build version 0.2806

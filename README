@@ -1,0 +1,35 @@
+Module: Text::CSV::Unicode
+
+Description:
+    Text::CSV::Unicode builds on Text::CSV to provides facilities for the 
+    composition and decomposition of comma-separated values.  
+    Text::CSV::Unicode handles input that includes 8-bit (and more) data.
+
+Copying:
+    Copyright (c) 2007 Robin Barker.  All rights reserved.  This program is
+    free software; you can redistribute it and/or modify it under the same
+    terms as Perl itself.
+
+    Text::CSV::Unicode::_bite is a direct copy of Text::CSV::_bite, except
+    as noted in the code.  The original code of Text::CSV::_bite is
+    Copyright (c) 1997 Alan Citterman. 
+
+Prerequisites:
+    perl 5.8.0
+
+Build/Installation:
+    Standard build/installation supported by ExtUtils::MakeMaker(3)...
+	perl Makefile.PL
+	make
+	make test
+	make install
+
+Recent Changes:
+    Version 0.01  2007/07/10
+	created by Robin Barker
+
+Author:
+    Robin Barker <rmbarker@cpan.org>
+   
+    based on Text::CSV by
+    Alan Citterman <alan@mfgrtl.com>
