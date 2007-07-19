@@ -25,6 +25,9 @@ Build/Installation:
 	make install
 
 Recent Changes:
+    Version 0.02  2007/07/19
+	POD fixes
+	Added requires perl 5.008
     Version 0.01  2007/07/10
 	created by Robin Barker
 

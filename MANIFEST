@@ -1,5 +1,6 @@
 README
 MANIFEST
+Changes
 lib/Text/CSV/Unicode.pm
 Build.PL
 Makefile.PL                              Created by Module::Build 

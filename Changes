@@ -1,0 +1,8 @@
+Revision history for Perl extension Text::CSV::Unicode.
+
+0.01  Tue Jul 10 14:21:57 2007
+	- original version; created from my locally modified Text::CSV
+
+0.02  2007-07-19
+	- fix use of C< binary => 1 > in POD
+	- added requires => { perl => 5.008 } to Build.PL

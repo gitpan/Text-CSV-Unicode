@@ -1,7 +1,7 @@
 package Text::CSV::Unicode;
 
-# $Date: 2007-07-17 12:36:31 +0100 (Tue, 17 Jul 2007) $
-# $Revision: 96 $
+# $Date: 2007-07-17 15:27:04 +0100 (Tue, 17 Jul 2007) $
+# $Revision: 100 $
 # $Source: $
 # $URL: file:///home/rmb1/repos/perl/Text-CSV-Unicode/trunk/lib/Text/CSV/Unicode.pm $
 
@@ -11,7 +11,7 @@ use warnings;
 use Text::CSV;
 use charnames qw(:full);
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 use base qw(Text::CSV);
 
 sub new {
@@ -144,13 +144,12 @@ Text::CSV::Unicode -    comma-separated values manipulation routines
 
  $csv = Text::CSV::Unicode->new( { binary => 1 } );
 
- # then can use methods from Text::CSV
+ # then use methods from Text::CSV
 
 =head1 DESCRIPTION
 
 Text::CSV::Unicode provides facilities for the composition and
 decomposition of comma-separated values, based on Text::CSV.
-
 Text::CSV::Unicode allows for input with wide character data.
 
 =head1 FUNCTIONS
@@ -163,8 +162,8 @@ Text::CSV::Unicode allows for input with wide character data.
 
 This function may be called as a class or an object method.
 It returns a reference to a newly created Text::CSV::Unicode object.
-C<binary => 0> allows the same ASCII input as Text::CSV and all
-other input, while C<binary => 1> allows for all printable Unicode
+C<< binary => 0 >> allows the same ASCII input as Text::CSV and all
+other input, while C<< binary => 1 >> allows for all printable Unicode
 characters in the input (including \r and \n),
 
 =back
@@ -199,7 +198,7 @@ Cannot change separators and delimeters.
 
 =head1 VERSION
 
-0.01
+0.02
 
 =head1 AUTHOR
 
