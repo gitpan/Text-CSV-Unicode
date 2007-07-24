@@ -6,3 +6,6 @@ Revision history for Perl extension Text::CSV::Unicode.
 0.02  2007-07-19
 	- fix use of C< binary => 1 > in POD
 	- added requires => { perl => 5.008 } to Build.PL
+
+0.03  2007-07-24
+	- Add C<use 5.008;> to Makefile.PL to prevent test failures

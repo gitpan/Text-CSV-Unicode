@@ -1,7 +1,7 @@
 package Text::CSV::Unicode;
 
-# $Date: 2007-07-17 15:27:04 +0100 (Tue, 17 Jul 2007) $
-# $Revision: 100 $
+# $Date: 2007-07-24 15:13:12 +0100 (Tue, 24 Jul 2007) $
+# $Revision: 107 $
 # $Source: $
 # $URL: file:///home/rmb1/repos/perl/Text-CSV-Unicode/trunk/lib/Text/CSV/Unicode.pm $
 
@@ -11,7 +11,7 @@ use warnings;
 use Text::CSV;
 use charnames qw(:full);
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 use base qw(Text::CSV);
 
 sub new {

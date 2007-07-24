@@ -25,6 +25,8 @@ Build/Installation:
 	make install
 
 Recent Changes:
+    Version 0.03  2007/07/24
+	Makefile.PL requires 5.008
     Version 0.02  2007/07/19
 	POD fixes
 	Added requires perl 5.008

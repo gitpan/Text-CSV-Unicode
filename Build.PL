@@ -1,3 +1,4 @@
+use lib 'inc';
 use Module::Build;	
 Module::Build->new(
 	module_name	=> 'Text::CSV::Unicode',
