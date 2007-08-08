@@ -1,6 +1,6 @@
 ---
 name: Text-CSV-Unicode
-version: 0.03
+version: 0.04
 author:
   - 'Robin Barker <rmbarker@cpan.org>'
 abstract: |-
@@ -13,5 +13,5 @@ requires:
 provides:
   Text::CSV::Unicode:
     file: lib/Text/CSV/Unicode.pm
-    version: 0.03
+    version: 0.04
 generated_by: Module::Build version 0.2806

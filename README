@@ -25,6 +25,8 @@ Build/Installation:
 	make install
 
 Recent Changes:
+    Version 0.04  2007/08/10
+	Tests skip_all if pre-requistites missing
     Version 0.03  2007/07/24
 	Makefile.PL requires 5.008
     Version 0.02  2007/07/19

@@ -1,9 +1,9 @@
 package Text::CSV::Unicode;
 
-# $Date: 2007-07-24 15:13:12 +0100 (Tue, 24 Jul 2007) $
-# $Revision: 107 $
+# $Date: 2007-08-08 12:30:45 +0100 (Wed, 08 Aug 2007) $
+# $Revision: 110 $
 # $Source: $
-# $URL: file:///home/rmb1/repos/perl/Text-CSV-Unicode/trunk/lib/Text/CSV/Unicode.pm $
+# $URL: $
 
 use 5.008;
 use strict;
@@ -11,7 +11,7 @@ use warnings;
 use Text::CSV;
 use charnames qw(:full);
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 use base qw(Text::CSV);
 
 sub new {
@@ -65,7 +65,7 @@ sub _bite {
                 elsif ( ${$line_ref} =~ m{\A \042 {2} }msx ) {
 
                     # an embedded double-quote...
-                    # PBP does like "\042"
+                    # PBP does not like "\042"
                     ${$piece_ref} .= "\N{QUOTATION MARK}";
                     substr ${$line_ref}, 0, 2, q{};
                 }
@@ -198,7 +198,7 @@ Cannot change separators and delimeters.
 
 =head1 VERSION
 
-0.02
+0.04
 
 =head1 AUTHOR
 

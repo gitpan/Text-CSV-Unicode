@@ -5,9 +5,19 @@
 
 # change 'tests => 1' to 'tests => last_test_to_print';
 
-use Test::More tests => 24;
+use Test::More;
+
+BEGIN{ 
+    unless( $ENV{TCU_TEST_SKIP_REQUIRES} ) {
+        plan skip_all => 'requires perl v5.8.0'
+		unless eval{ require 5.8.0 };
+        plan skip_all => 'requires Text::CSV' 
+            	unless eval{ require Text::CSV };
+    }
+    plan tests => 24;
+    use_ok('Text::CSV::Unicode')
+}
 my $tester=Test::More->builder;
-BEGIN { use_ok('Text::CSV::Unicode') };
 
 #########################
 

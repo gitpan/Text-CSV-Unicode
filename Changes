@@ -9,3 +9,7 @@ Revision history for Perl extension Text::CSV::Unicode.
 
 0.03  2007-07-24
 	- Add C<use 5.008;> to Makefile.PL to prevent test failures
+
+0.04  2007-08-10
+	- two typos in lib/Text/CSV/Unicode.pm, and hide URL
+	- skip_all tests in t/1.t if not perl v5.8.0 or Text::CSV
