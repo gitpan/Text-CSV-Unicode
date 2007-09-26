@@ -1,7 +1,7 @@
 package Text::CSV::Unicode;
 
-# $Date: 2007-08-08 12:30:45 +0100 (Wed, 08 Aug 2007) $
-# $Revision: 110 $
+# $Date: 2007-09-25 14:36:40 +0100 (Tue, 25 Sep 2007) $
+# $Revision: 141 $
 # $Source: $
 # $URL: $
 
@@ -9,10 +9,35 @@ use 5.008;
 use strict;
 use warnings;
 use Text::CSV;
-use charnames qw(:full);
-
-our $VERSION = '0.04';
 use base qw(Text::CSV);
+
+# PBP does not like "\042"
+use charnames qw(:full);
+my $quote = "\N{QUOTATION MARK}";
+my $qqr   = qr{ $quote }msx;
+
+our $VERSION = '0.05';
+
+sub import {
+    my $package = shift;
+    my $version = $Text::CSV::VERSION;
+    if ( $version =~ m{\A -1 , .* base\.pm}msx ) { undef $version }
+    my $vstring = defined $version ? 'v' . $version : '(no version)';
+    if ( $vstring ne 'v0.01' ) {
+        warn "\n$package is intended as an extension of Text::CSV v0.01,",
+          "\nthe only version released by Alan Citterman.\n",
+          "It is not expected to work with Text::CSV $vstring",
+          (
+              !$version      ? ()
+            : $version < 0.5 ? ' (unknown author)'
+            : ",\nas released by Eduardo Rangel Thompson"
+              . ",\nmarked on CPAN as '** UNAUTHORIZED RELEASE **'"
+          ),
+          ".\nTo suppress this warning,",
+          " use 'use $package ()'\n\tor 'require $package'.\n\n";
+    }
+    return;
+}
 
 sub new {
     my $self = shift->SUPER::new();
@@ -51,7 +76,7 @@ sub _bite {
             }
             last;
         }
-        if ( ${$line_ref} =~ m{\A \042 }msx ) {
+        if ( ${$line_ref} =~ m{\A $qqr }mosx ) {
 
             # double-quote...
             if ($in_quotes) {
@@ -62,14 +87,13 @@ sub _bite {
                     $ok = 1;
                     last;
                 }
-                elsif ( ${$line_ref} =~ m{\A \042 {2} }msx ) {
+                elsif ( ${$line_ref} =~ m{\A $qqr {2} }mosx ) {
 
                     # an embedded double-quote...
-                    # PBP does not like "\042"
-                    ${$piece_ref} .= "\N{QUOTATION MARK}";
+                    ${$piece_ref} .= $quote;
                     substr ${$line_ref}, 0, 2, q{};
                 }
-                elsif ( ${$line_ref} =~ m{\A \042 , }msx ) {
+                elsif ( ${$line_ref} =~ m{\A $qqr , }mosx ) {
 
                     # closing double-quote followed by a comma...
                     substr ${$line_ref}, 0, 2, q{};
@@ -194,11 +218,11 @@ None
 
 As slow as Text::CSV.
 
-Cannot change separators and delimeters.
+Cannot change separators and delimiters.
 
 =head1 VERSION
 
-0.04
+0.05
 
 =head1 AUTHOR
 

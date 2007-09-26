@@ -8,11 +8,11 @@
 use Test::More;
 
 BEGIN{ 
-    unless( $ENV{TCU_TEST_SKIP_REQUIRES} ) {
+    unless( $ENV{TEST_CSV_UNICODE_SKIP_REQUIRES} ) {
         plan skip_all => 'requires perl v5.8.0'
-		unless eval{ require 5.8.0 };
+                unless eval{ require 5.8.0 }; 
         plan skip_all => 'requires Text::CSV' 
-            	unless eval{ require Text::CSV };
+                unless eval{ require Text::CSV };
     }
     plan tests => 24;
     use_ok('Text::CSV::Unicode')

@@ -16,6 +16,7 @@ Copying:
 
 Prerequisites:
     perl 5.8.0
+    Text::CSV
 
 Build/Installation:
     Standard build/installation supported by ExtUtils::MakeMaker(3)...
@@ -25,7 +26,9 @@ Build/Installation:
 	make install
 
 Recent Changes:
-    Version 0.04  2007/08/10
+    Version 0.05  2007/09/25
+	use import() to check correct Text::CSV
+    Version 0.04  2007/08/08
 	Tests skip_all if pre-requistites missing
     Version 0.03  2007/07/24
 	Makefile.PL requires 5.008
