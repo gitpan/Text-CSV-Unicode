@@ -1,7 +1,7 @@
 package Text::CSV::Unicode;
 
-# $Date: 2007-09-25 14:36:40 +0100 (Tue, 25 Sep 2007) $
-# $Revision: 141 $
+# $Date: 2007-09-25 14:45:31 +0100 (Tue, 25 Sep 2007) $
+# $Revision: 142 $
 # $Source: $
 # $URL: $
 
@@ -16,7 +16,7 @@ use charnames qw(:full);
 my $quote = "\N{QUOTATION MARK}";
 my $qqr   = qr{ $quote }msx;
 
-our $VERSION = '0.05';
+our $VERSION = '0.06';
 
 sub import {
     my $package = shift;
@@ -222,7 +222,7 @@ Cannot change separators and delimiters.
 
 =head1 VERSION
 
-0.05
+0.06
 
 =head1 AUTHOR
 

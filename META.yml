@@ -1,22 +1,13 @@
----
-name: Text-CSV-Unicode
-version: 0.05
-author:
-  - 'Robin Barker <rmbarker@cpan.org>'
-abstract: |-
-  comma-separated values manipulation routines
-                          with potentially wide character data
-license: perl
-resources:
-  license: http://dev.perl.org/licenses/
-requires:
-  Text::CSV: 0.01
-  perl: 5.008
-provides:
-  Text::CSV::Unicode:
-    file: lib/Text/CSV/Unicode.pm
-    version: 0.05
-generated_by: Module::Build version 0.280801
+--- #YAML:1.0
+name:                Text-CSV-Unicode
+version:             0.06
+abstract:            ~
+license:             ~
+author:              ~
+generated_by:        ExtUtils::MakeMaker version 6.42
+distribution_type:   module
+requires:     
+    Text::CSV:                     0.01
 meta-spec:
-  url: http://module-build.sourceforge.net/META-spec-v1.2.html
-  version: 1.2
+    url:     http://module-build.sourceforge.net/META-spec-v1.3.html
+    version: 1.3

@@ -26,17 +26,15 @@ Build/Installation:
 	make install
 
 Recent Changes:
+    Version 0.06  2007/12/29
+	warning clean for perl 5.10.0;
+	remove use of custom Module::Build::Compat
     Version 0.05  2007/09/25
 	use import() to check correct Text::CSV
     Version 0.04  2007/08/08
 	Tests skip_all if pre-requistites missing
     Version 0.03  2007/07/24
 	Makefile.PL requires 5.008
-    Version 0.02  2007/07/19
-	POD fixes
-	Added requires perl 5.008
-    Version 0.01  2007/07/10
-	created by Robin Barker
 
 Author:
     Robin Barker <rmbarker@cpan.org>

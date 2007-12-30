@@ -16,5 +16,8 @@ Revision history for Perl extension Text::CSV::Unicode.
 
 0.05  2007-09-25
 	- use import to check Text::CSV 0.01 not the "UNAUTHORIZED RELEASE"
-	- use a veriable for \N{QUOTATION MARK} in strings and regexp
+	- use a variable for \N{QUOTATION MARK} in strings and regexp
 
+0.06  2007-12-30
+	- remove inc/Module/Build/Compat.pm: functionality now in release
+	- reinstate C<no warnings portable>: warnings clean for perl 5.10.0

@@ -9,6 +9,7 @@ use Test::More;
 
 BEGIN{ 
     unless( $ENV{TEST_CSV_UNICODE_SKIP_REQUIRES} ) {
+	no warnings qw(portable); 
         plan skip_all => 'requires perl v5.8.0'
                 unless eval{ require 5.8.0 }; 
         plan skip_all => 'requires Text::CSV' 
