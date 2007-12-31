@@ -14,9 +14,12 @@ Copying:
     as noted in the code.  The original code of Text::CSV::_bite is
     Copyright (c) 1997 Alan Citterman. 
 
+    Test::CSV::Base is a direct copy of Text::CSV,
+    with only the module name changed (and white-space changes),
+    and is Copyright (c) 1997 Alan Citterman.
+
 Prerequisites:
     perl 5.8.0
-    Text::CSV
 
 Build/Installation:
     Standard build/installation supported by ExtUtils::MakeMaker(3)...
@@ -26,15 +29,15 @@ Build/Installation:
 	make install
 
 Recent Changes:
-    Version 0.06  2007/12/29
+    Version 0.099 2007/12/31
+	added Text::CSV as Text::CSV::Base
+
+    Version 0.06  2007/12/30
 	warning clean for perl 5.10.0;
 	remove use of custom Module::Build::Compat
+
     Version 0.05  2007/09/25
 	use import() to check correct Text::CSV
-    Version 0.04  2007/08/08
-	Tests skip_all if pre-requistites missing
-    Version 0.03  2007/07/24
-	Makefile.PL requires 5.008
 
 Author:
     Robin Barker <rmbarker@cpan.org>

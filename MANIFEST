@@ -2,7 +2,9 @@ README
 MANIFEST
 Changes
 lib/Text/CSV/Unicode.pm
+lib/Text/CSV/Base.pm
 Build.PL
 Makefile.PL                              Created by Module::Build 
 t/1.t
+t/base.t
 META.yml                                 Module meta-data (added by MakeMaker)

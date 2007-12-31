@@ -1,43 +1,22 @@
 package Text::CSV::Unicode;
 
-# $Date: 2007-09-25 14:45:31 +0100 (Tue, 25 Sep 2007) $
-# $Revision: 142 $
+# $Date: 2007-12-31 00:11:47 +0000 (Mon, 31 Dec 2007) $
+# $Revision: 186 $
 # $Source: $
 # $URL: $
 
 use 5.008;
 use strict;
 use warnings;
-use Text::CSV;
-use base qw(Text::CSV);
+use Text::CSV::Base ();
+use base qw(Text::CSV::Base);
 
 # PBP does not like "\042"
 use charnames qw(:full);
 my $quote = "\N{QUOTATION MARK}";
 my $qqr   = qr{ $quote }msx;
 
-our $VERSION = '0.06';
-
-sub import {
-    my $package = shift;
-    my $version = $Text::CSV::VERSION;
-    if ( $version =~ m{\A -1 , .* base\.pm}msx ) { undef $version }
-    my $vstring = defined $version ? 'v' . $version : '(no version)';
-    if ( $vstring ne 'v0.01' ) {
-        warn "\n$package is intended as an extension of Text::CSV v0.01,",
-          "\nthe only version released by Alan Citterman.\n",
-          "It is not expected to work with Text::CSV $vstring",
-          (
-              !$version      ? ()
-            : $version < 0.5 ? ' (unknown author)'
-            : ",\nas released by Eduardo Rangel Thompson"
-              . ",\nmarked on CPAN as '** UNAUTHORIZED RELEASE **'"
-          ),
-          ".\nTo suppress this warning,",
-          " use 'use $package ()'\n\tor 'require $package'.\n\n";
-    }
-    return;
-}
+our $VERSION = '0.099';
 
 sub new {
     my $self = shift->SUPER::new();
@@ -168,12 +147,12 @@ Text::CSV::Unicode -    comma-separated values manipulation routines
 
  $csv = Text::CSV::Unicode->new( { binary => 1 } );
 
- # then use methods from Text::CSV
+ # then use methods from Text::CSV::Base
 
 =head1 DESCRIPTION
 
 Text::CSV::Unicode provides facilities for the composition and
-decomposition of comma-separated values, based on Text::CSV.
+decomposition of comma-separated values, based on Text::CSV (0.01).
 Text::CSV::Unicode allows for input with wide character data.
 
 =head1 FUNCTIONS
@@ -182,7 +161,7 @@ Text::CSV::Unicode allows for input with wide character data.
 
 =item new
 
- $csv = Text::CSV->new( [{ binary => 1 }] );
+ $csv = Text::CSV::Unicode->new( [{ binary => 1 }] );
 
 This function may be called as a class or an object method.
 It returns a reference to a newly created Text::CSV::Unicode object.
@@ -206,8 +185,6 @@ See HASH option to C<< ->new >>.
 
 =head1 DEPENDENCIES
 
-Text::CSV 0.01
-
 perl 5.8.0
 
 =head1 INCOMPATIBILITIES
@@ -222,7 +199,7 @@ Cannot change separators and delimiters.
 
 =head1 VERSION
 
-0.06
+0.099
 
 =head1 AUTHOR
 
@@ -241,6 +218,10 @@ terms as Perl itself.
 Text::CSV::Unicode::_bite is a direct copy of Text::CSV::_bite, except
 as noted in the code.  The original code of Text::CSV::_bite is
 Copyright (c) 1997 Alan Citterman.
+
+Test::CSV::Base is a direct copy of Text::CSV,
+with only the module name changed (and white-space changes),
+and is Copyright (c) 1997 Alan Citterman.
 
 =cut
 
