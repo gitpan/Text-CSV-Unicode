@@ -12,22 +12,31 @@ package Text::CSV::Base;
 #
 # Version 0.01  06/05/1997
 #    original version
+#
+# Maintained (as Text::CSV::Base) by:
+#    Robin Barker <rmbarker@cpan.org>
+#
+# Version 0.01  2007-12-30
+#    converted to Text::CSV::Base
+#	% perl -pwe 's/Text::CSV/Text::CSV::Base/ && s/ {6}\#/\#/' \ 
+#		../Text-CSV-0.01/CSV.pm  > lib/Text/CSV/Base.pm
+#
+# Version 0.02  2007-12-31
+#    correct POD; update BEGIN {}
 ################################################################################
+# $Date: 2007-12-31 15:42:24 +0000 (Mon, 31 Dec 2007) $
+# $Revision: 192 $
+# $Source: $
+# $URL: $
 
-require 5.002;
+require 5.006;
 
 use strict;
 
-BEGIN {
-  use Exporter   ();
-  use AutoLoader qw(AUTOLOAD);
-  use vars       qw($VERSION @ISA @EXPORT @EXPORT_OK %EXPORT_TAGS);
-  $VERSION =     '0.01';
-  @ISA =         qw(Exporter AutoLoader);
-  @EXPORT =      qw();
-  @EXPORT_OK =   qw();
-  %EXPORT_TAGS = qw();
-}
+use Exporter   ();
+use AutoLoader qw(AUTOLOAD);
+use base       qw(Exporter AutoLoader);
+our $VERSION = '0.02';
 
 1;
 
@@ -57,6 +66,10 @@ sub new {
   $self->{'_ERROR_INPUT'} = undef;
   $self->{'_STRING'} = undef;
   $self->{'_FIELDS'} = undef;
+
+  $self->{'_CHAROK'} = qr{^[\t\040-\176]};
+# This is the regexp from the line now marked RMB (in _bite)
+
   bless $self, $class;
   return $self;
 }
@@ -228,93 +241,114 @@ sub parse {
 #      setting string()
 #      setting error_input()
 ################################################################################
+# This subroutine is copied verbatim from Text::CSV Version 0.01
+# and is Copyright (c) 1997 Alan Citterman.
+# Robin Barker changed one line - marked RMB below
+# - but then applied Perl Best Practices to code.
+
 sub _bite {
-  my ($self, $line_ref, $piece_ref, $bite_again_ref) = @_;
-  my $in_quotes = 0;
-  my $ok = 0;
-  $$piece_ref = '';
-  $$bite_again_ref = 0;
-  while (1) {
-    if (length($$line_ref) < 1) {
+    my ( $self, $line_ref, $piece_ref, $bite_again_ref ) = @_;
+    my $in_quotes = 0;
+    my $ok        = 0;
+    ${$piece_ref}      = q{};
+    ${$bite_again_ref} = 0;
 
-      # end of string...
-      if ($in_quotes) {
+    # PBP does not like "\042"
+    use charnames qw(:full);
+    my $quote = "\N{QUOTATION MARK}";
+    my $qqr   = qr{ $quote }msx;
 
-	# end of string, missing closing double-quote...
-	last;
-      } else {
+    while (1) {
+        if ( length( ${$line_ref} ) < 1 ) {
 
-	# proper end of string...
-	$ok = 1;
-	last;
-      }
-    } elsif ($$line_ref =~ /^\042/) {
+            # end of string...
+            if ($in_quotes) {
 
-      # double-quote...
-      if ($in_quotes) {
-	if (length($$line_ref) == 1) {
+                # end of string, missing closing double-quote...
+            }
+            else {
 
-	  # closing double-quote at end of string...
-	  substr($$line_ref, 0, 1) = '';
-	  $ok = 1;
-	  last;
-	} elsif ($$line_ref =~ /^\042\042/) {
+                # proper end of string...
+                $ok = 1;
+            }
+            last;
+        }
+        if ( ${$line_ref} =~ m{\A $qqr }mosx ) {
 
-	  # an embedded double-quote...
-	  $$piece_ref .= "\042";
-	  substr($$line_ref, 0, 2) = '';
-	} elsif ($$line_ref =~ /^\042,/) {
+            # double-quote...
+            if ($in_quotes) {
+                if ( length( ${$line_ref} ) == 1 ) {
 
-	  # closing double-quote followed by a comma...
-	  substr($$line_ref, 0, 2) = '';
-	  $$bite_again_ref = 1;
-	  $ok = 1;
-	  last;
-	} else {
+                    # closing double-quote at end of string...
+                    substr ${$line_ref}, 0, 1, q{};
+                    $ok = 1;
+                    last;
+                }
+                elsif ( ${$line_ref} =~ m{\A $qqr {2} }mosx ) {
 
-	  # double-quote, followed by undesirable character (bad character sequence)...
-	  last;
-	}
-      } else {
-	if (length($$piece_ref) < 1) {
+                    # an embedded double-quote...
+                    ${$piece_ref} .= $quote;
+                    substr ${$line_ref}, 0, 2, q{};
+                }
+                elsif ( ${$line_ref} =~ m{\A $qqr , }mosx ) {
 
-	  # starting double-quote at beginning of string
-	  $in_quotes = 1;
-	  substr($$line_ref, 0, 1) = '';
-	} else {
+                    # closing double-quote followed by a comma...
+                    substr ${$line_ref}, 0, 2, q{};
+                    ${$bite_again_ref} = 1;
+                    $ok = 1;
+                    last;
+                }
+                else {
 
-	  # double-quote, outside of double-quotes (bad character sequence)...
-	  last;
-	}
-      }
-    } elsif ($$line_ref =~ /^,/) {
+                    # double-quote, followed by undesirable character
+                    # (bad character sequence)...
+                    last;
+                }
+            }
+            else {
+                if ( length( ${$piece_ref} ) < 1 ) {
 
-      # comma...
-      if ($in_quotes) {
+                    # starting double-quote at beginning of string
+                    $in_quotes = 1;
+                    substr ${$line_ref}, 0, 1, q{};
+                }
+                else {
 
-	# a comma, inside double-quotes...
-	$$piece_ref .= substr($$line_ref, 0 ,1);
-	substr($$line_ref, 0, 1) = '';
-      } else {
+                    # double-quote, outside of double-quotes
+                    # (bad character sequence)...
+                    last;
+                }
+            }
+        }
+        elsif ( ${$line_ref} =~ m{\A , }msx ) {
 
-	# a comma, which separates values...
-	substr($$line_ref, 0, 1) = '';
-	$$bite_again_ref = 1;
-	$ok = 1;
-	last;
-      }
-    } elsif ($$line_ref =~ /^[\t\040-\176]/) {
+            # comma...
+            if ($in_quotes) {
 
-      # a tab, space, or printable...
-      $$piece_ref .= substr($$line_ref, 0 ,1);
-      substr($$line_ref, 0, 1) = '';
-    } else {
+                # a comma, inside double-quotes...
+                ${$piece_ref} .= substr ${$line_ref}, 0, 1, q{};
+            }
+            else {
 
-      # an undesirable character...
-      last;
+                # a comma, which separates values...
+                substr ${$line_ref}, 0, 1, q{};
+                ${$bite_again_ref} = 1;
+                $ok = 1;
+                last;
+            }
+        }
+        elsif ( ${$line_ref} =~ $self->{_CHAROK} ) {    # RMB: changed line
+
+            # a tab, space, or printable...
+            ${$piece_ref} .= substr ${$line_ref}, 0, 1, q{};
+        }
+        else {
+
+            # an undesirable character...
+            last;
+        }
     }
-  }
-  return $ok;
+    return $ok;
 }
 
 =head1 NAME
@@ -340,9 +374,8 @@ Text::CSV::Base - comma-separated values manipulation routines
 
 =head1 DESCRIPTION
 
-Text::CSV::Base provides facilities for
-the composition and decomposition of comma-separated values. 
-An instance of the Text::CSV::Base class can combine
+Text::CSV::Base provides facilities for the composition and decomposition of
+comma-separated values.  An instance of the Text::CSV::Base class can combine
 fields into a CSV string and parse a CSV string into fields.
 
 =head1 FUNCTIONS
@@ -477,6 +510,8 @@ double-quote, represented by a pair of consecutive double-quotes.
 
 A CSV string may be terminated by 0x0A (line feed) or by 0x0D,0x0A
 (carriage return, line feed).
+
+=back
 
 =head1 AUTHOR
 

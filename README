@@ -5,18 +5,25 @@ Description:
     composition and decomposition of comma-separated values.  
     Text::CSV::Unicode handles input that includes 8-bit (and more) data.
 
+    It is based on version 0.01 of Text::CSV, but later versions of that
+    module are not compatible with Text::CSV::Unicode, so Text-CSV-0.01
+    has been integrated into this distribution as lib/Text/CSV/Base.pm 
+    and t/base.t; specifically
+	% perl -pwe 's/Text::CSV/Text::CSV::Base/ && s/ {6}\#/\#/' \ 
+		../Text-CSV-0.01/CSV.pm  > lib/Text/CSV/Base.pm
+	% perl -pwe 's/Text::CSV/Text::CSV::Base/'		   \
+		../Text-CSV-0.01/test.pl > t/base.t
+
 Copying:
-    Copyright (c) 2007 Robin Barker.  All rights reserved.  This program is
-    free software; you can redistribute it and/or modify it under the same
-    terms as Perl itself.
+    Copyright (c) 2007 Robin Barker.  All rights reserved.
+    This program is free software; you can redistribute it
+    and/or modify it under the same terms as Perl itself.
 
-    Text::CSV::Unicode::_bite is a direct copy of Text::CSV::_bite, except
-    as noted in the code.  The original code of Text::CSV::_bite is
-    Copyright (c) 1997 Alan Citterman. 
-
-    Test::CSV::Base is a direct copy of Text::CSV,
-    with only the module name changed (and white-space changes),
-    and is Copyright (c) 1997 Alan Citterman.
+    lib/Text/CSV/Base.pm (version 0.1) was a direct copy of 
+    Text-CSV-0.01/CSV.pm, and t/base.t was a direct copy of
+    Text-CSV-0.01/test.pl, with only the module name changed
+    (and white-space changes), and these files are
+    Copyright (c) 1997 Alan Citterman.
 
 Prerequisites:
     perl 5.8.0
@@ -29,6 +36,9 @@ Build/Installation:
 	make install
 
 Recent Changes:
+    Version 0.100 2007/12/31
+	more documentation for inclusion of Text::CSV::Base
+
     Version 0.099 2007/12/31
 	added Text::CSV as Text::CSV::Base
 
@@ -41,6 +51,6 @@ Recent Changes:
 
 Author:
     Robin Barker <rmbarker@cpan.org>
-   
+
     based on Text::CSV by
     Alan Citterman <alan@mfgrtl.com>

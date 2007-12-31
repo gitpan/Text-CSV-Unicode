@@ -98,3 +98,4 @@ my $empty = Empty_Subclass->new();
 ok (($empty->version() and $empty->parse('') and $empty->combine('')),
 				'empty subclass test');
 
+# $Id: unicode.t 191 2007-12-31 15:27:08Z rmb1 $

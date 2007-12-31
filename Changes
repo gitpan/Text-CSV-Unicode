@@ -24,3 +24,7 @@ Revision history for Perl extension Text::CSV::Unicode.
 
 0.099 2007-12-31
 	- Text::CSV::Base
+
+0.100 2007-12-31
+	- more documentation from Text::CSV 
+	- documentation of the inclusion of lib/Text/CSV/Base.pm t/base.t
