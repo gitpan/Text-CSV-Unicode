@@ -13,7 +13,7 @@ BEGIN{
         plan skip_all => 'requires perl v5.8.0'
                 unless eval{ require 5.8.0 }; 
     }
-    plan tests => 24;
+    plan tests => 25;
     use_ok('Text::CSV::Unicode')
 }
 my $tester=Test::More->builder;
@@ -71,6 +71,9 @@ ok (($csv->parse(qq("","I said,\t""Hi!""","")) and
   ok ($csv->status(),		"success - test $test should have succeeded");
 }
 
+is( $csv->version(), $Text::CSV::Unicode::VERSION,
+				'inheritted version() works properly');
+
 my $csv1 = Text::CSV::Unicode->new( { binary => 1 } );
 ok ($csv1->parse(qq("abc\nc")),	'success - \n allowed');
 
@@ -98,4 +101,4 @@ my $empty = Empty_Subclass->new();
 ok (($empty->version() and $empty->parse('') and $empty->combine('')),
 				'empty subclass test');
 
-# $Id: unicode.t 191 2007-12-31 15:27:08Z rmb1 $
+# $Id: unicode.t 196 2008-01-01 13:16:33Z rmb1 $

@@ -1,7 +1,7 @@
 package Text::CSV::Unicode;
 
-# $Date: 2007-12-31 15:45:32 +0000 (Mon, 31 Dec 2007) $
-# $Revision: 193 $
+# $Date: 2008-01-01 14:54:18 +0000 (Tue, 01 Jan 2008) $
+# $Revision: 203 $
 # $Source: $
 # $URL: $
 
@@ -11,16 +11,14 @@ use warnings;
 use Text::CSV::Base ();
 use base qw(Text::CSV::Base);
 
-our $VERSION = '0.100';
+our $VERSION = '0.110';
 
 sub new {
     my $self = shift->SUPER::new();
     my %opts =
       ( @_ == 1 and ref $_[0] and ( ref $_[0] ) eq 'HASH' ) ? %{ $_[0] } : @_;
     $self->{'_CHAROK'} =
-      $opts{binary}
-      ? qr{\A \p{Print} }msx
-      : qr{\A (?: \t | \P{Cntrl} ) }msx;
+      $opts{binary} ? qr{ \p{Print} }msx : qr{ \t | \P{Cntrl} }msx;
     return $self;
 }
 
@@ -206,9 +204,7 @@ which may not be the most general.
 
 =item 1 
 
-Allowable characters within a CSV field include 0x09 (tab) and 
-all non-control characters, with C<< binary => 0 >> they are
-restricted to all printable characters.
+Allowable characters within a CSV field are all printable characters.
 
 =item 2
 
@@ -231,7 +227,7 @@ Line-ending characters are handled as part of the data.
 
 =head1 VERSION
 
-0.100
+0.110
 
 =head1 AUTHOR
 
@@ -243,7 +239,7 @@ Text::CSV 0.01
 
 =head1 LICENSE AND COPYRIGHT
 
-Copyright (c) 2007 Robin Barker.  All rights reserved. 
+Copyright (c) 2007, 2008 Robin Barker.  All rights reserved. 
 This program is free software; you can redistribute it
 and/or modify it under the same terms as Perl itself.
 

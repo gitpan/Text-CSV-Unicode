@@ -23,9 +23,14 @@ package Text::CSV::Base;
 #
 # Version 0.02  2007-12-31
 #    correct POD; update BEGIN {}
+#
+# Version 0.03  2008-01-01
+#    make ->version an inheritable package method
+#    remove AutoLoader
+#    use _CHAROK in combine
 ################################################################################
-# $Date: 2007-12-31 15:42:24 +0000 (Mon, 31 Dec 2007) $
-# $Revision: 192 $
+# $Date: 2008-01-01 14:54:18 +0000 (Tue, 01 Jan 2008) $
+# $Revision: 203 $
 # $Source: $
 # $URL: $
 
@@ -33,14 +38,12 @@ require 5.006;
 
 use strict;
 
-use Exporter   ();
-use AutoLoader qw(AUTOLOAD);
-use base       qw(Exporter AutoLoader);
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
-1;
-
-__END__
+# PBP does not like "\042"
+use charnames qw(:full);
+my $quote = "\N{QUOTATION MARK}";
+my $qqr   = qr{ $quote }msx;
 
 ################################################################################
 # version
@@ -49,7 +52,16 @@ __END__
 #    of Text::CSV::Base.  there are no side-effects.
 ################################################################################
 sub version {
-  return $VERSION;
+    my $self = shift;
+    my $vers = $self -> VERSION();
+    return $vers if defined $vers;
+
+    # inherit missing version from parent: 
+    # pass empty subclass tests
+    return eval {
+	no strict qw(refs);
+	((ref $self or $self).'::ISA') -> [0] -> version();
+    }
 }
 
 ################################################################################
@@ -67,7 +79,7 @@ sub new {
   $self->{'_STRING'} = undef;
   $self->{'_FIELDS'} = undef;
 
-  $self->{'_CHAROK'} = qr{^[\t\040-\176]};
+  $self->{'_CHAROK'} = qr{[\t\040-\176]};
 # This is the regexp from the line now marked RMB (in _bite)
 
   bless $self, $class;
@@ -145,11 +157,12 @@ sub combine {
   my $column = '';
   my $combination = '';
   my $skip_comma = 1;
+  my $char_ok = qr{ \A $self->{_CHAROK} * \z }msx; 	# RMB
   if ($#part >= 0) {
 
     # at least one argument was given for "combining"...
     for $column (@part) {
-      if ($column =~ /[^\t\040-\176]/) {
+      if ($column !~ $char_ok) {			# RMB
 
 	# an argument contained an invalid character...
 	$self->{'_ERROR_INPUT'} = $column;
@@ -196,6 +209,7 @@ sub parse {
   if (!defined($self->{'_STRING'})) {
     return $self->{'_STATUS'};
   }
+  our $parse_char_ok = qr{ \A $self->{_CHAROK} }msx; 	# RMB
   my $keep_biting = 1;
   my $palatable = 0;
   my $line = $self->{'_STRING'};
@@ -252,11 +266,6 @@ sub _bite {
     my $ok        = 0;
     ${$piece_ref}      = q{};
     ${$bite_again_ref} = 0;
-
-    # PBP does not like "\042"
-    use charnames qw(:full);
-    my $quote = "\N{QUOTATION MARK}";
-    my $qqr   = qr{ $quote }msx;
 
     while (1) {
         if ( length( ${$line_ref} ) < 1 ) {
@@ -337,7 +346,7 @@ sub _bite {
                 last;
             }
         }
-        elsif ( ${$line_ref} =~ $self->{_CHAROK} ) {    # RMB: changed line
+        elsif ( ${$line_ref} =~ our $parse_char_ok ) {	# RMB: changed line
 
             # a tab, space, or printable...
             ${$piece_ref} .= substr ${$line_ref}, 0, 1, q{};
@@ -350,6 +359,10 @@ sub _bite {
     }
     return $ok;
 }
+
+1;
+
+__END__
 
 =head1 NAME
 
