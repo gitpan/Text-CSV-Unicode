@@ -36,3 +36,9 @@ Revision history for Perl extension Text::CSV::Unicode.
 	- fix Text::CSV::Unicode->version
 	- fix documentation of allowable characters in CAVEATS
 
+0.111 2008-04-08
+    	Changes to improve kwalitee
+	- Build.PL not executable
+	- added C<use warnings> to Text::CSV::Base
+	- added Test::More to build_requires
+	- added examples/

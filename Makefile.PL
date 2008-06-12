@@ -8,6 +8,8 @@ WriteMakefile
           'NAME' => 'Text::CSV::Unicode',
           'EXE_FILES' => [],
           'VERSION_FROM' => 'lib/Text/CSV/Unicode.pm',
-          'PREREQ_PM' => {}
+          'PREREQ_PM' => {
+                           'Test::More' => 0
+                         }
         )
 ;

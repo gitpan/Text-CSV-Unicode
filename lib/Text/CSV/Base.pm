@@ -29,16 +29,17 @@ package Text::CSV::Base;
 #    remove AutoLoader
 #    use _CHAROK in combine
 ################################################################################
-# $Date: 2008-01-01 14:54:18 +0000 (Tue, 01 Jan 2008) $
-# $Revision: 203 $
+# $Date: 2008-04-07 20:00:03 +0100 (Mon, 07 Apr 2008) $
+# $Revision: 207 $
 # $Source: $
 # $URL: $
 
 require 5.006;
 
 use strict;
+use warnings;
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 # PBP does not like "\042"
 use charnames qw(:full);

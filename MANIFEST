@@ -1,6 +1,8 @@
 README
 MANIFEST
 Changes
+examples/combine.pl
+examples/parse.pl
 lib/Text/CSV/Unicode.pm
 lib/Text/CSV/Base.pm
 Build.PL
