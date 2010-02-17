@@ -42,3 +42,7 @@ Revision history for Perl extension Text::CSV::Unicode.
 	- added C<use warnings> to Text::CSV::Base
 	- added Test::More to build_requires
 	- added examples/
+
+0.112 2010-02-17
+	Change to _CHAROK due to changes to unicode properties in perl 5.11.4
+

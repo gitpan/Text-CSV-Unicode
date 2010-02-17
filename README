@@ -15,7 +15,7 @@ Description:
 		../Text-CSV-0.01/test.pl > t/base.t
 
 Copying:
-    Copyright (c) 2007, 2008 Robin Barker.  All rights reserved.
+    Copyright (c) 2007, 2008, 2010 Robin Barker.  All rights reserved.
     This program is free software; you can redistribute it
     and/or modify it under the same terms as Perl itself.
 
@@ -36,6 +36,9 @@ Build/Installation:
 	make install
 
 Recent Changes:
+    Version 0.112 2010/02/17
+	change to align with perl 5.12 unicode properties
+
     Version 0.111 2008/04/08
 	changes to improve kwalite (see cpants.perl.org)
 

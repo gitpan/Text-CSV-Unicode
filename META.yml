@@ -1,6 +1,6 @@
 ---
 name: Text-CSV-Unicode
-version: 0.111
+version: 0.112
 author:
   - 'Robin Barker <rmbarker@cpan.org>'
 abstract: |-
@@ -9,18 +9,20 @@ abstract: |-
 license: perl
 resources:
   license: http://dev.perl.org/licenses/
-requires:
-  perl: 5.008
 build_requires:
   Test::More: 0
+requires:
+  perl: 5.008
+configure_requires:
+  Module::Build: 0.35
 provides:
   Text::CSV::Base:
     file: lib/Text/CSV/Base.pm
     version: 0.04
   Text::CSV::Unicode:
     file: lib/Text/CSV/Unicode.pm
-    version: 0.111
-generated_by: Module::Build version 0.280801
+    version: 0.112
+generated_by: Module::Build version 0.35
 meta-spec:
-  url: http://module-build.sourceforge.net/META-spec-v1.2.html
-  version: 1.2
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4

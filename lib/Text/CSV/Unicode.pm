@@ -1,7 +1,7 @@
 package Text::CSV::Unicode;
 
-# $Date: 2008-04-07 20:00:03 +0100 (Mon, 07 Apr 2008) $
-# $Revision: 207 $
+# $Date: 2010-02-17 16:47:20 +0000 (Wed, 17 Feb 2010) $
+# $Revision: 254 $
 # $Source: $
 # $URL: $
 
@@ -11,14 +11,14 @@ use warnings;
 use Text::CSV::Base ();
 use base qw(Text::CSV::Base);
 
-our $VERSION = '0.111';
+our $VERSION = '0.112';
 
 sub new {
     my $self = shift->SUPER::new();
     my %opts =
       ( @_ == 1 and ref $_[0] and ( ref $_[0] ) eq 'HASH' ) ? %{ $_[0] } : @_;
     $self->{'_CHAROK'} =
-      $opts{binary} ? qr{ \p{Print} }msx : qr{ \t | \P{Cntrl} }msx;
+      $opts{binary} ? qr{ \p{Any} }msx : qr{ \t | \P{Cntrl} }msx;
     return $self;
 }
 
@@ -79,7 +79,7 @@ It returns the current module version.
 This function may be called as a class or an object method.
 It returns a reference to a newly created Text::CSV::Unicode object.
 C<< binary => 0 >> allows the same ASCII input as Text::CSV and all
-other input, while C<< binary => 1 >> allows for all printable Unicode
+other input, while C<< binary => 1 >> allows for all Unicode
 characters in the input (including \r and \n),
 
 =item combine
@@ -204,7 +204,9 @@ which may not be the most general.
 
 =item 1 
 
-Allowable characters within a CSV field are all printable characters.
+Allowable characters within a CSV field are all unicode characters,
+with C<< binary => 1 >>; otherwise control characters are not allowed,
+but the tab character is allowed.
 
 =item 2
 
