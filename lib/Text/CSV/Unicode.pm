@@ -1,7 +1,7 @@
 package Text::CSV::Unicode;
 
-# $Date: 2010-02-17 16:47:20 +0000 (Wed, 17 Feb 2010) $
-# $Revision: 254 $
+# $Date: 2011-08-24 18:01:35 +0100 (Wed, 24 Aug 2011) $
+# $Revision: 259 $
 # $Source: $
 # $URL: $
 
@@ -11,7 +11,7 @@ use warnings;
 use Text::CSV::Base ();
 use base qw(Text::CSV::Base);
 
-our $VERSION = '0.112';
+our $VERSION = '0.113';		# change to Text/CSV/Base.pm 0.041
 
 sub new {
     my $self = shift->SUPER::new();
@@ -92,6 +92,8 @@ arguments or an argument containing an invalid character.  Upon
 success, C<string()> can be called to retrieve the resultant CSV
 string.  Upon failure, the value returned by C<string()> is undefined
 and C<error_input()> can be called to retrieve an invalid argument.
+
+Silent accepts undef values in input and treats as an empty string.
 
 =item string
 

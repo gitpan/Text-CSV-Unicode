@@ -36,6 +36,10 @@ Build/Installation:
 	make install
 
 Recent Changes:
+    Version 0.113 2011/08/24
+	Text::CSV::Base 0.041
+	allow undef input values in combine, without warnings
+
     Version 0.112 2010/02/17
 	change to align with perl 5.12 unicode properties
 

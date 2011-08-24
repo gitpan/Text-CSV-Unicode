@@ -1,6 +1,7 @@
 use Module::Build;	
 Module::Build->new(
 	module_name	=> 'Text::CSV::Unicode',
+	configure_requires => { Module::Build => 0.38 }, 
 	requires	=> { perl => 5.008 },
 	build_requires	=> { Test::More => 0 },
 	license		=> 'perl',	

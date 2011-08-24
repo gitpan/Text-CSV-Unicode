@@ -29,8 +29,8 @@ package Text::CSV::Base;
 #    remove AutoLoader
 #    use _CHAROK in combine
 ################################################################################
-# $Date: 2008-04-07 20:00:03 +0100 (Mon, 07 Apr 2008) $
-# $Revision: 207 $
+# $Date: 2011-08-24 17:38:31 +0100 (Wed, 24 Aug 2011) $
+# $Revision: 258 $
 # $Source: $
 # $URL: $
 
@@ -39,7 +39,7 @@ require 5.006;
 use strict;
 use warnings;
 
-our $VERSION = '0.04';
+our $VERSION = '0.041';
 
 # PBP does not like "\042"
 use charnames qw(:full);
@@ -163,7 +163,8 @@ sub combine {
 
     # at least one argument was given for "combining"...
     for $column (@part) {
-      if ($column !~ $char_ok) {			# RMB
+      if (defined $column and				# RMB 2011
+	$column !~ $char_ok) {				# RMB
 
 	# an argument contained an invalid character...
 	$self->{'_ERROR_INPUT'} = $column;
@@ -178,9 +179,9 @@ sub combine {
 	# do put a comma before all arguments except the first argument...
 	$combination .= ',';
       }
-      $column =~ s/\042/\042\042/go;
+      $column =~ s/\042/\042\042/go if defined $column;	# RMB 2011
       $combination .= "\042";
-      $combination .= $column;
+      $combination .= $column if defined $column;	# RMB 2011
       $combination .= "\042";
     }
     $self->{'_STRING'} = $combination;

@@ -46,3 +46,9 @@ Revision history for Perl extension Text::CSV::Unicode.
 0.112 2010-02-17
 	Change to _CHAROK due to changes to unicode properties in perl 5.11.4
 
+0.113 2011-08-24
+	Update Text/CSV/Base.pm to version 0.041
+	Add t/combine-undef.t
+	- avoid warnings on undef values in input array to combine
+
+`
