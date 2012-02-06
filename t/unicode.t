@@ -5,6 +5,7 @@
 
 # change 'tests => 1' to 'tests => last_test_to_print';
 
+use strict;
 use Test::More;
 
 BEGIN{ 
@@ -94,11 +95,11 @@ ok (($csv1->parse(qq("","I said,\n""Hi!""","")) and
 # empty subclass test
 #
 package Empty_Subclass;
-@ISA = qw(Text::CSV::Unicode);
+our @ISA = qw(Text::CSV::Unicode);
 
 package main;
 my $empty = Empty_Subclass->new();
 ok (($empty->version() and $empty->parse('') and $empty->combine('')),
 				'empty subclass test');
 
-# $Id: unicode.t 196 2008-01-01 13:16:33Z rmb1 $
+# $Id: unicode.t 284 2012-02-06 15:16:08Z robin $

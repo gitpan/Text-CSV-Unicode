@@ -1,7 +1,7 @@
 package Text::CSV::Unicode;
 
-# $Date: 2011-08-24 18:01:35 +0100 (Wed, 24 Aug 2011) $
-# $Revision: 259 $
+# $Date: 2012-02-06 15:28:09 +0000 (Mon, 06 Feb 2012) $
+# $Revision: 285 $
 # $Source: $
 # $URL: $
 
@@ -11,7 +11,7 @@ use warnings;
 use Text::CSV::Base ();
 use base qw(Text::CSV::Base);
 
-our $VERSION = '0.113';		# change to Text/CSV/Base.pm 0.041
+our $VERSION = '0.114';
 
 sub new {
     my $self = shift->SUPER::new();
@@ -93,7 +93,7 @@ success, C<string()> can be called to retrieve the resultant CSV
 string.  Upon failure, the value returned by C<string()> is undefined
 and C<error_input()> can be called to retrieve an invalid argument.
 
-Silent accepts undef values in input and treats as an empty string.
+Silently accepts undef values in input and treats as an empty string.
 
 =item string
 
@@ -243,7 +243,9 @@ Text::CSV 0.01
 
 =head1 LICENSE AND COPYRIGHT
 
-Copyright (c) 2007, 2008 Robin Barker.  All rights reserved. 
+Copyright (c) 2007, 2008, 2010, 2011, 2012 Robin Barker.  
+All rights reserved. 
+
 This program is free software; you can redistribute it
 and/or modify it under the same terms as Perl itself.
 

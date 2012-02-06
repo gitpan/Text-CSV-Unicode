@@ -19,9 +19,9 @@ provides:
     version: 0.041
   Text::CSV::Unicode:
     file: lib/Text/CSV/Unicode.pm
-    version: 0.113
+    version: 0.114
 requires:
   perl: 5.008
 resources:
   license: http://dev.perl.org/licenses/
-version: 0.113
+version: 0.114

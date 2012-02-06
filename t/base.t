@@ -6,6 +6,8 @@
 # Change 1..1 below to 1..last_test_to_print .
 # (It may become useful if the test is moved to ./t subdirectory.)
 
+use strict;
+my $loaded;
 BEGIN { $| = 1; print "1..20\n"; }
 END {print "not ok 1\n" unless $loaded;}
 use Text::CSV::Base;
@@ -22,7 +24,7 @@ print "ok 1\n";
 # empty subclass test
 #
 package Empty_Subclass;
-@ISA = qw(Text::CSV::Base);
+our @ISA = qw(Text::CSV::Base);
 package main;
 my $empty = Empty_Subclass->new();
 if ($empty->version() and $empty->parse('') and $empty->combine('')) {
@@ -130,4 +132,4 @@ if ($csv->status()) {  # success - test #19 should have succeeded
   print "not ok 20\n";  
 }
 
-# $Id: base.t 191 2007-12-31 15:27:08Z rmb1 $
+# $Id: base.t 284 2012-02-06 15:16:08Z robin $

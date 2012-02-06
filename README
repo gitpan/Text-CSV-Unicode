@@ -15,7 +15,9 @@ Description:
 		../Text-CSV-0.01/test.pl > t/base.t
 
 Copying:
-    Copyright (c) 2007, 2008, 2010 Robin Barker.  All rights reserved.
+    Copyright (c) 2007, 2008, 2010, 2011, 2012 Robin Barker.  
+    All rights reserved.
+
     This program is free software; you can redistribute it
     and/or modify it under the same terms as Perl itself.
 
@@ -24,6 +26,12 @@ Copying:
     Text-CSV-0.01/test.pl, with only the module name changed
     (and white-space changes), and these files are
     Copyright (c) 1997 Alan Citterman.
+
+Author:
+    Robin Barker <rmbarker@cpan.org>
+
+    based on Text::CSV by
+    Alan Citterman <alan@mfgrtl.com>
 
 Prerequisites:
     perl 5.8.0
@@ -36,6 +44,9 @@ Build/Installation:
 	make install
 
 Recent Changes:
+    Version 0.114 2012/02/06
+	strictness in tests
+
     Version 0.113 2011/08/24
 	Text::CSV::Base 0.041
 	allow undef input values in combine, without warnings
@@ -49,19 +60,3 @@ Recent Changes:
     Version 0.110 2008/01/01
 	allow unicode in combine
 
-    Version 0.100 2007/12/31
-	more documentation for inclusion of Text::CSV::Base
-
-    Version 0.099 2007/12/31
-	added Text::CSV as Text::CSV::Base
-
-    Version 0.06  2007/12/30
-	warning clean for perl 5.10.0;
-	remove use of custom Module::Build::Compat
-    !! Failed with release of Text::CSV 1.00 on CPAN
-
-Author:
-    Robin Barker <rmbarker@cpan.org>
-
-    based on Text::CSV by
-    Alan Citterman <alan@mfgrtl.com>
