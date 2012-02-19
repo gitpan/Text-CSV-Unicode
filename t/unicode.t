@@ -13,6 +13,8 @@ BEGIN{
 	no warnings qw(portable); 
         plan skip_all => 'requires perl v5.8.0'
                 unless eval{ require 5.8.0 }; 
+        plan skip_all => 'charnames required'
+                unless eval{ require charnames }; 
     }
     plan tests => 25;
     use_ok('Text::CSV::Unicode')
@@ -102,4 +104,4 @@ my $empty = Empty_Subclass->new();
 ok (($empty->version() and $empty->parse('') and $empty->combine('')),
 				'empty subclass test');
 
-# $Id: unicode.t 284 2012-02-06 15:16:08Z robin $
+# $Id: unicode.t 290 2012-02-19 22:25:30Z robin $

@@ -56,3 +56,7 @@ Revision history for Perl extension Text::CSV::Unicode.
 	in the test scripts, despite no C<use strict>
 	- add <use strict;> and make the test scripts strict
 
+0.115 2012-02-19
+	perl 5.15.5 fails due to faulty installation:
+	put in explicit require/skip_all for charnames
+

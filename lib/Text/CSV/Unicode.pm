@@ -1,7 +1,7 @@
 package Text::CSV::Unicode;
 
-# $Date: 2012-02-06 15:28:09 +0000 (Mon, 06 Feb 2012) $
-# $Revision: 285 $
+# $Date: 2012-02-19 22:33:13 +0000 (Sun, 19 Feb 2012) $
+# $Revision: 291 $
 # $Source: $
 # $URL: $
 
@@ -11,7 +11,7 @@ use warnings;
 use Text::CSV::Base ();
 use base qw(Text::CSV::Base);
 
-our $VERSION = '0.114';
+our $VERSION = '0.115';
 
 sub new {
     my $self = shift->SUPER::new();
@@ -231,7 +231,7 @@ Line-ending characters are handled as part of the data.
 
 =head1 VERSION
 
-0.111
+0.115
 
 =head1 AUTHOR
 

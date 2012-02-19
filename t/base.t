@@ -8,6 +8,12 @@
 
 use strict;
 my $loaded;
+BEGIN { 
+    if( ! eval { require charnames } ) {
+	print "1..0 # SKIP charnames required\n"; 
+	exit; 
+    } 
+}
 BEGIN { $| = 1; print "1..20\n"; }
 END {print "not ok 1\n" unless $loaded;}
 use Text::CSV::Base;
@@ -132,4 +138,4 @@ if ($csv->status()) {  # success - test #19 should have succeeded
   print "not ok 20\n";  
 }
 
-# $Id: base.t 284 2012-02-06 15:16:08Z robin $
+# $Id: base.t 290 2012-02-19 22:25:30Z robin $

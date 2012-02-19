@@ -4,7 +4,7 @@
       "Robin Barker <rmbarker@cpan.org>"
    ],
    "dynamic_config" : 1,
-   "generated_by" : "Module::Build version 0.38, CPAN::Meta::Converter version 2.110440",
+   "generated_by" : "Module::Build version 0.38, CPAN::Meta::Converter version 2.112150",
    "license" : [
       "perl_5"
    ],
@@ -26,6 +26,7 @@
       },
       "runtime" : {
          "requires" : {
+            "charnames" : "1",
             "perl" : "5.008"
          }
       }
@@ -37,7 +38,7 @@
       },
       "Text::CSV::Unicode" : {
          "file" : "lib/Text/CSV/Unicode.pm",
-         "version" : "0.114"
+         "version" : "0.115"
       }
    },
    "release_status" : "stable",
@@ -46,5 +47,5 @@
          "http://dev.perl.org/licenses/"
       ]
    },
-   "version" : "0.114"
+   "version" : "0.115"
 }
